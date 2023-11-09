@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TeacherRequest;
 use App\Models\teacher;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request;
 
 class TeacherController extends Controller
 {
@@ -12,7 +13,7 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.teachers.main'); 
     }
 
     /**
@@ -20,15 +21,16 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        //
+    return view('backend.teachers.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(TeacherRequest $request)
     {
-        //
+        dd($request->all(), $request->validated());
+       
     }
 
     /**

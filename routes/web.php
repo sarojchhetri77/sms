@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/advance',function(){
+    return view('backend.pages.forms.validation');
+});
+
+
+
+// resource route
+  
+Route::resource('teacher',TeacherController::class);
 
 Auth::routes();
 

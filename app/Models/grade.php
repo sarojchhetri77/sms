@@ -17,7 +17,7 @@ class grade extends Model
     return $this->hasMany(student::class);
     }
     public function teacher(){
-        return $this->hasMany(teacher::class);
+    return $this->hasMany(teacher::class);
     }
     public function book(){
         return $this->hasMany(book::class);
