@@ -12,24 +12,24 @@
         <p>Students</p>
       </div>
       <div class="icon">
-        <i class="ion ion-bag"></i>
+        <i class="ion  fa-solid fa-user"></i>
       </div>
-      <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      <a href="{{route('student.index')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
     </div>
   </div>
   <!-- ./col -->
   <div class="col-lg-3 col-6">
     <!-- small box -->
-    <div class="small-box bg-success">
+    <div class="small-box bg-success ">
       <div class="inner">
         <h3>53<sup style="font-size: 20px">%</sup></h3>
 
         <p>Teacher</p>
       </div>
       <div class="icon">
-        <i class="ion ion-stats-bars"></i>
+        <i class="ion  fa-solid fa-user"></i>
       </div>
-      <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      <a href="{{route('teacher.index')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
     </div>
   </div>
   <!-- ./col -->
@@ -42,9 +42,9 @@
         <p>Class</p>
       </div>
       <div class="icon">
-        <i class="ion ion-person-add"></i>
+        <i class="ion fa-solid fa-house"></i>
       </div>
-      <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      <a href="{{route('class.index')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
     </div>
   </div>
   <!-- ./col -->
@@ -57,9 +57,9 @@
         <p>Books</p>
       </div>
       <div class="icon">
-        <i class="ion ion-pie-graph"></i>
+        <i class="ion fa-solid fa-book"></i>
       </div>
-      <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      <a href="{{route('book.index')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
     </div>
   </div>
   <div class="col-lg-3 col-6">

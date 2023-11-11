@@ -12,7 +12,17 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $search = $request['search'] ?? "";
+        if ($search != "") {
+            $students = student::with('user')
+                ->whereHas('user', function ($query) use ($search) {
+                    $query->where('name', 'LIKE', "%$search%");
+                })->paginate(10);
+        } else {
+
+            $students = student::with('user')->paginate(10);
+        }
+        return view('backend.student.main', compact('students', 'search'));
     }
 
     /**
@@ -20,7 +30,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.student.create');
     }
 
     /**
@@ -28,7 +38,7 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**

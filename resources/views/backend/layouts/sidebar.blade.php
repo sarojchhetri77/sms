@@ -21,37 +21,60 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
+          <li class="nav-item {{ request()->is('home') ? 'menu-open' : '' }}">
+            <a href="{{route('home')}}" class="nav-link {{ request()->is('home') ? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
-                <i class="right fas fa-angle-left"></i>
+                {{-- <i class="right fas fa-angle-left"></i> --}}
               </p>
             </a>
-            <ul class="nav nav-treeview">
+            {{-- <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link active">
+                <a href="{{route('home')}}" class="nav-link {{ request()->is('home') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard</p>
+                  <p>Home</p>
                 </a>
               </li>
-            </ul>
+            </ul> --}}
           </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+          <li class="nav-item {{ request()->is('teacher') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ request()->is('teacher') ? 'active' : '' }}">
+              <i class="nav-icon fa-solid fa-user"></i>
               <p>
                 Teacher
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="./index.html" class="nav-link">
+              <li class="nav-item ">
+                <a href="{{route('teacher.index')}}" class="nav-link {{ request()->is('teacher') ? 'active' : '' }}">
                   <i class="far fa-eye nav-icon"></i>
                   <p>view</p>
                 </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item ">
+            <a href="#" class="nav-link ">
+              <i class="nav-icon fa-solid fa-gear"></i>
+              <p>
+                Setting
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item ">
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                              document.getElementById('logout-form').submit();">
+                <p>
+                  <i class="fa-solid fa-right-from-bracket nav-icon"></i>
+                  logout</p>
+             </a>
+             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+              @csrf
+          </form>
               </li>
             </ul>
           </li>
