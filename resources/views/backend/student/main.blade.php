@@ -45,7 +45,6 @@
                             <th>Date Of Birth</th>
                             <th>Phone</th>
                             <th>Address</th>
-                            <th>Hired At</th>
                             <th>Action</th>
                         </tr>
                     </thead>

@@ -147,6 +147,10 @@
                                                           <label for="email">Email address</label>
                                                           <input type="email" value="{{$teacher->user->email}}" class="form-control" id="email" disabled>
                                                         </div>
+                                                        <div class="form-group text-start">
+                                                          <label for="email">Gender</label>
+                                                          <input type="email" value="{{$teacher->gender}}" class="form-control" id="email" disabled>
+                                                        </div>
                                                       
                                                       </div>
                                                         <div class="modal-footer">
