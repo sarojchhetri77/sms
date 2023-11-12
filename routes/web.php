@@ -31,7 +31,7 @@ Route::get('/advance',function(){
   
 Route::resource('teacher',TeacherController::class);
 Route::resource('student',StudentController::class);
-Route::resource('class',GradeController::class);
+Route::resource('grade',GradeController::class);
 Route::resource('book',BookController::class);
 
 Auth::routes();
