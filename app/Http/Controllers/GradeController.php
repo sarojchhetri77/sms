@@ -14,24 +14,23 @@ class GradeController extends Controller
     public function index(Request $request)
     {
         $search = $request['search'] ?? "";
-if ($search != "") {
-    $classes = grade::whereHas('teacher', function ($query) use ($search) {
-        $query->where('name', 'LIKE', "%$search%");
-    })->paginate(10);
-} else {
-    $classes = Grade::with('teacher.user')->paginate(10);
+        if ($search != "") {
+            $classes = grade::whereHas('teacher', function ($query) use ($search) {
+                $query->where('name', 'LIKE', "%$search%");
+            })->paginate(10);
+        } else {
+            $classes = Grade::with('teacher.user')->paginate(10);
+        }
+        return view('backend.grades.main', compact('classes', 'search'));
     }
-    return view('backend.grades.main', compact('classes', 'search'));
-
-}
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {   
+    {
         $teachers = teacher::with('user')->get();
-        return view('backend.grades.create',compact('teachers'));
+        return view('backend.grades.create', compact('teachers'));
     }
 
     /**
@@ -40,7 +39,7 @@ if ($search != "") {
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255', 
+            'name' => 'required|string|max:255',
             'section' => 'max:255'
         ]);
 
@@ -50,8 +49,6 @@ if ($search != "") {
         $grade->teacher_id = $request->teacher_id;
         $grade->save();
         return redirect()->route('grade.index');
-
-
     }
 
     /**

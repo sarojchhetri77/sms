@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\book;
+use App\Models\grade;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -10,17 +11,26 @@ class BookController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index( Request $request)
     {
-        //
+        $search = $request['search'] ?? "";
+        if ($search != "") {
+            $books = book::whereHas('grade', function ($query) use ($search) {
+                $query->where('name', 'LIKE', "%$search%");
+            })->paginate(10);
+        } else {
+            $books = book::with('grade')->paginate(10);
+        }
+        return view('backend.books.main', compact('books', 'search'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        //
+    {   
+        $grades = grade::all();
+        return view('backend.books.create',compact('grades'));
     }
 
     /**
@@ -28,7 +38,12 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $book = new book();
+        $book->name = $request->name;
+        $book->class_id = $request->class_id;
+        $book->save();
+        return redirect()->route('book.index');
+
     }
 
     /**
