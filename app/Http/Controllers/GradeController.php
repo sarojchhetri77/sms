@@ -80,6 +80,7 @@ class GradeController extends Controller
      */
     public function destroy(grade $grade)
     {
-        //
+      $grade->delete();
+      return redirect()->route('grade.index');
     }
 }

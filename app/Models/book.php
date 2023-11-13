@@ -12,7 +12,7 @@ class book extends Model
         'name',
         'class_id'
     ];
-    public function grade(){
-        return $this->belongsTo(grade::class);
+    public function grades(){
+        return $this->belongsTo(grade::class,'class_id');
     }
 }

@@ -15,11 +15,11 @@ class BookController extends Controller
     {
         $search = $request['search'] ?? "";
         if ($search != "") {
-            $books = book::whereHas('grade', function ($query) use ($search) {
+            $books = book::whereHas('grades', function ($query) use ($search) {
                 $query->where('name', 'LIKE', "%$search%");
             })->paginate(10);
         } else {
-            $books = book::with('grade')->paginate(10);
+            $books = book::with('grades')->paginate(10);
         }
         return view('backend.books.main', compact('books', 'search'));
     }
@@ -75,6 +75,7 @@ class BookController extends Controller
      */
     public function destroy(book $book)
     {
-        //
+       $book->delete();
+       return  redirect()->route('book.index');
     }
 }

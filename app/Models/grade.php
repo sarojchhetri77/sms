@@ -22,4 +22,7 @@ class grade extends Model
     public function book(){
         return $this->hasMany(book::class);
     }
+    public function enrollment(){
+      return $this->hasMany(enrollment::class);
+    }
 }

@@ -12,4 +12,10 @@ class enrollment extends Model
         'student_id',
         'class_id'
     ];
+    public function grade(){
+        return $this->belongsTo(grade::class ,'class_id');
+    }
+    public function student(){
+        return $this->belongsTo(student::class ,'student_id');
+    }
 }

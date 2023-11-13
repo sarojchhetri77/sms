@@ -22,6 +22,9 @@ class student extends Model
      public function grade(){
         return $this->belongsTo(grade::class);
      }
+     public function enrollment(){
+      return $this->hasMany(enrollment::class);
+     }
      
 
 

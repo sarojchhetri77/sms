@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StudentStoreRequest;
+use App\Models\enrollment;
+use App\Models\grade;
 use App\Models\student;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,13 +19,16 @@ class StudentController extends Controller
     {
         $search = $request['search'] ?? "";
         if ($search != "") {
-            $students = student::with('user')
+            $students = student::with('user','enrollment.grade')
                 ->whereHas('user', function ($query) use ($search) {
                     $query->where('name', 'LIKE', "%$search%");
+                })->orWhereHas('enrollment.grade', function ($query) use ($search) {
+                    $query->where('name', 'LIKE', "%$search%");
                 })->paginate(10);
-        } else {
+        } 
+        else {
 
-            $students =student::with('user')->paginate(10);
+            $students =student::with('user','enrollment.grade')->paginate(10);
         }
         return view('backend.student.main', compact('students', 'search'));
     }
@@ -32,8 +37,9 @@ class StudentController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        return view('backend.student.create');
+    {   
+        $classes =  grade::all();
+        return view('backend.student.create',compact('classes'));
     }
 
     /**
@@ -62,7 +68,13 @@ class StudentController extends Controller
             $student->phone = $request->phone;
             $student->user_id = $user->id;
             $student->save();
+            // code to enroll student  in class
+            $enrollment = new enrollment();
+            $enrollment->student_id = $student->id;
+            $enrollment->class_id = $request->grade_id;
+            $enrollment->save();
             return redirect()->route('student.index')->with('success', 'student created successfully');
+            
         } 
         else {
             return redirect()->route('student.create')->with('failed', 'enter same password');
@@ -99,6 +111,7 @@ class StudentController extends Controller
      */
     public function destroy(student $student)
     {
-        //
+         $student->delete();
+         return redirect()->route('student.index');
     }
 }

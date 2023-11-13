@@ -42,17 +42,17 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Class Teacher</th>
+                            <th>Class</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @if (count($books) > 0)
-                            @foreach ($books as $book)
+   -                         @foreach ($books as $book)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $book->name }}</td>
-                                    <td>{{ $book->grade->name }}</td>
+                                    <td>{{ $book->grades->name }}</td>
                                    
                                     <td>
                                         <a href="#" class="btn-sm btn btn-success" data-bs-toggle="modal"

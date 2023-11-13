@@ -36,8 +36,14 @@
                   <input type="date" name="dob" class="form-control" id="dob" placeholder="Password">
                 </div>
                 <div class="form-group">
-                  <label for="hired">Hire At</label>
-                  <input type="date" name="hired" class="form-control" id="hired" placeholder="Password">
+                  <label>Select Class</label>
+                  <select class="form-control" name="grade_id" style="width: 100%;">
+                    @foreach ($classes as $grade)
+                        
+                    <option value="{{$grade->id}}" >{{$grade->name}} {{$grade->section}}</option>
+                    @endforeach
+                    
+                  </select>
                 </div>
                 <div class="form-group">
                   <label for="email">Email address</label>

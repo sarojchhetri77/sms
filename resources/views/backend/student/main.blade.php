@@ -45,6 +45,7 @@
                             <th>Date Of Birth</th>
                             <th>Phone</th>
                             <th>Address</th>
+                            <th>class</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -57,6 +58,7 @@
                                     <td>{{ $student->dob }}</td>
                                     <td>{{ $student->phone }}</td>
                                     <td>{{ $student->address }}</td>
+                                    <td>{{ $student->enrollment->first()->grade->name ?? 'N/A' }}</td>
                                     <td>
                                         <a href="#" class="btn-sm btn btn-success" data-bs-toggle="modal"
                                             data-bs-target="#studentModalEdit_{{ $student->id }}"><i
