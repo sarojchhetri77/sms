@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\assign_book;
 use App\Models\book;
 use App\Models\grade;
 use App\Models\teacher;
@@ -20,10 +21,11 @@ class BookController extends Controller
                 $query->where('name', 'LIKE', "%$search%");
             })->paginate(10);
         } else {
+            $bookss = Book::doesntHave('assignteacher')->get();
             $books = book::with('grades')->paginate(10);
             $teachers = teacher::with('user')->get();
         }
-        return view('backend.books.main', compact('books', 'search','teachers'));
+        return view('backend.books.main', compact('books', 'search','teachers','bookss'));
     }
 
     /**
@@ -40,12 +42,21 @@ class BookController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+    {   if ($request->has('teacher_id') && $request->has('book_id')) {
+           $assign = new assign_book();
+           $assign->teacher_id = $request->teacher_id;
+           $assign->book_id = $request->book_id;
+           $assign->save();
+           return redirect()->route('book.index')->with("message","teacher is assign successfully");
+    }
+    else{
+
         $book = new book();
         $book->name = $request->name;
         $book->class_id = $request->class_id;
         $book->save();
         return redirect()->route('book.index');
+    }
 
     }
 

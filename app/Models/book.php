@@ -15,4 +15,7 @@ class book extends Model
     public function grades(){
         return $this->belongsTo(grade::class,'class_id');
     }
+    public function assignteacher(){
+        return $this->hasMany(assign_book::class,'book_id');
+    }
 }

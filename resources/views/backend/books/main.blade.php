@@ -5,80 +5,70 @@
     <div class="col-12">
         <div class="py-2">
 
-            <a href="{{ route('book.create') }}" class="btn btn-primary btn-sm"> <i
-                    class="fa-solid fa-plus px-1"></i>Add</a>
-                    @if ($search)
-                        
-                    <a href="{{ route('book.index') }}" class="btn btn-primary btn-sm"> <i
-                            class="fa-solid fa-arrow-left px-1"></i>Go Back</a>
-                    @endif
+            <a href="{{ route('book.create') }}" class="btn btn-primary btn-sm"> <i class="fa-solid fa-plus px-1"></i>Add</a>
+            @if ($search)
+                <a href="{{ route('book.index') }}" class="btn btn-primary btn-sm"> <i
+                        class="fa-solid fa-arrow-left px-1"></i>Go Back</a>
+            @endif
 
-                    {{-- assign book to teacher button --}}
-                    <a href="#" class="btn-sm btn btn-success" data-bs-toggle="modal"
-                    data-bs-target="#studentModalEdit_1"><i
-                        class="fa fa-plus px-1"></i> Assign Teacher</a>
+            {{-- assign book to teacher button --}}
+            <a href="#" class="btn-sm btn btn-success" data-bs-toggle="modal" data-bs-target="#studentModalEdit_1"><i
+                    class="fa fa-plus px-1"></i> Assign Teacher</a>
 
 
-                <!-- Modal -->
-                <div class="modal fade" id="studentModalEdit_1" tabindex="-1"
-                    role="dialog" aria-labelledby="studentModalLabel_1 }}"
-                    aria-hidden="true">
-                    <div class="modal-dialog  modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="staticBackdropLabel">
-                                    Edit book
-                                </h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form action=""
-                                    method="POST">
-                                    @csrf
-                                    @method('put')
-                                    <div class="form-group">
-                                        <label>Select Book</label>
-                                        
-                                        <select class="form-control" name="class_id" style="width: 100%;">
-                                            @foreach ($books as $book)
-                                            
-                                            <option value="{{$book->id}}">{{$book->name}} of class {{$book->grades->name}}</option>
-                                            @endforeach
-                                              
-                                          
-                                          
-                                        </select>
-                                      </div>
-                                      <div class="form-group">
-                                        <label>Select Teacher</label>
-                                        <select class="form-control" name="class_id" style="width: 100%;">
-                                         
-                                          @foreach ($teachers as $teacher)
-                                              
-                                          <option value="{{$teacher->id}}">{{$teacher->user->name}}</option>
-                                          @endforeach
-                                        
-                                              
-                                          
-                                          
-                                        </select>
-                                      </div>
+            <!-- Modal -->
+            <div class="modal fade" id="studentModalEdit_1" tabindex="-1" role="dialog"
+                aria-labelledby="studentModalLabel_1 }}" aria-hidden="true">
+                <div class="modal-dialog  modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">
+                                Assign teacher
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('book.store') }}" method="POST">
+                                @csrf
+                                <div class="form-group">
+                                    <label>Select Book</label>
+
+                                    <select class="form-control" name="book_id" style="width: 100%;">
+                                        @foreach ($bookss as $book)
+                                            <option value="{{ $book->id }}">{{ $book->name }} of class
+                                                {{ $book->grades->name }}</option>
+                                        @endforeach
 
 
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary"
-                                            data-bs-dismiss="modal">Submit</button>
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
-                                    </div>
-                                </form>
 
-                            </div>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Select Teacher</label>
+                                    <select class="form-control" name="teacher_id" style="width: 100%;">
+
+                                        @foreach ($teachers as $teacher)
+                                            <option value="{{ $teacher->id }}">{{ $teacher->user->name }}</option>
+                                        @endforeach
+
+
+
+
+                                    </select>
+                                </div>
+
+
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </form>
 
                         </div>
+
                     </div>
                 </div>
+            </div>
         </div>
         <div class="card">
             <div class="card-header">
@@ -115,12 +105,12 @@
                     </thead>
                     <tbody>
                         @if (count($books) > 0)
-   -                         @foreach ($books as $book)
+                            - @foreach ($books as $book)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $book->name }}</td>
                                     <td>{{ $book->grades->name }}</td>
-                                   
+
                                     <td>
                                         <a href="#" class="btn-sm btn btn-success" data-bs-toggle="modal"
                                             data-bs-target="#studentModalEdit_{{ $book->id }}"><i
@@ -184,67 +174,69 @@
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                     </div>
-                                                      <div class="card-body">
+                                                    <div class="card-body">
                                                         <div class="form-group text-start">
-                                                          <label for="name">Name</label>
-                                                          <input type="text" value="{{$book->name}}"  class="form-control" id="name" disabled>
+                                                            <label for="name">Name</label>
+                                                            <input type="text" value="{{ $book->name }}"
+                                                                class="form-control" id="name" disabled>
                                                         </div>
                                                         <div class="form-group text-start">
-                                                          <label for="address">Address</label>
-                                                          <input type="text" value="{{$book->address}}"  class="form-control" id="address" disabled>
+                                                            <label for="address">Address</label>
+                                                            <input type="text" value="{{ $book->address }}"
+                                                                class="form-control" id="address" disabled>
                                                         </div>
                                                         <div class="form-group text-start">
                                                             <label for="phone">Phone</label>
-                                                            <input type="text" value="{{$book->phone}} "  class="form-control" id="phone" disabled>
-                                                          </div>
+                                                            <input type="text" value="{{ $book->phone }} "
+                                                                class="form-control" id="phone" disabled>
+                                                        </div>
                                                         <div class="form-group text-start">
-                                                          <label for="dob">Date Of Birth</label>
-                                                          <input type="text" value="{{$book->dob}}" class="form-control" id="dob" disabled>
+                                                            <label for="dob">Date Of Birth</label>
+                                                            <input type="text" value="{{ $book->dob }}"
+                                                                class="form-control" id="dob" disabled>
                                                         </div>
-                                                      
-                                                      </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-bs-dismiss="modal">Close</button>
-                                                        </div>
-                                                        </form>
 
                                                     </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Close</button>
+                                                    </div>
+                                                    </form>
 
                                                 </div>
+
                                             </div>
                                         </div>
-                                        <form action="{{ route('book.destroy', $book->id) }}" class="d-inline"
-                                            method="POST">
-                                            @csrf
-                                            @method('delete')
-                                            <button type="submit" class="btn btn-danger btn-sm"
-                                                onclick="return confirm('Are you want to delete')"><i
-                                                    class="fa-solid fa-trash"></i></button>
-                                        </form>
-
-                                    </td>
-                                </tr>
-                            @endforeach
-                        @else
-                            <tr>
-                                <td colspan="6">
-                                    <h3> No Books are added</h3>
-                                </td>
-                                <!-- Adjust colspan based on the number of columns in your table -->
-                            </tr>
-                        @endif
-                    </tbody>
-                </table>
-
             </div>
+            <form action="{{ route('book.destroy', $book->id) }}" class="d-inline" method="POST">
+                @csrf
+                @method('delete')
+                <button type="submit" class="btn btn-danger btn-sm"
+                    onclick="return confirm('Are you want to delete')"><i class="fa-solid fa-trash"></i></button>
+            </form>
 
+            </td>
+            </tr>
+            @endforeach
+        @else
+            <tr>
+                <td colspan="6">
+                    <h3> No Books are added</h3>
+                </td>
+                <!-- Adjust colspan based on the number of columns in your table -->
+            </tr>
+            @endif
+            </tbody>
+            </table>
 
-            <!-- /.card-body -->
         </div>
-        @if ($books->count() > 0)
-            {{ $books->links() }} <!-- Pagination links, if using paginate() -->
-        @endif
+
+
+        <!-- /.card-body -->
+    </div>
+    @if ($books->count() > 0)
+        {{ $books->links() }} <!-- Pagination links, if using paginate() -->
+    @endif
 
 
 

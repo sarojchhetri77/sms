@@ -23,4 +23,9 @@ class teacher extends Model
     public function grade(){
         return $this->hasMany(grade::class);
     }
+   
+    public function assignBooks()
+    {
+        return $this->hasMany(assign_book::class, 'teacher_id');
+    }
 }
