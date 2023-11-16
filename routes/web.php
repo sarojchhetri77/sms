@@ -28,11 +28,13 @@ Route::get('/advance',function(){
 
 
 // resource route
-  
-Route::resource('teacher',TeacherController::class);
-Route::resource('student',StudentController::class);
-Route::resource('grade',GradeController::class);
-Route::resource('book',BookController::class);
+  Route::middleware(['auth'])->group(function(){
+    Route::resource('teacher',TeacherController::class);
+    Route::resource('student',StudentController::class);
+    Route::resource('grade',GradeController::class);
+    Route::resource('book',BookController::class);
+  });
+
 
 Auth::routes();
 

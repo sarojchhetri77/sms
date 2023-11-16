@@ -38,23 +38,28 @@
               </li>
             </ul> --}}
           </li>
-          <li class="nav-item {{ request()->is('teacher') ? 'menu-open' : '' }}">
-            <a href="#" class="nav-link {{ request()->is('teacher') ? 'active' : '' }}">
-              <i class="nav-icon fa-solid fa-user"></i>
-              <p>
-                Teacher
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item ">
-                <a href="{{route('teacher.index')}}" class="nav-link {{ request()->is('teacher') ? 'active' : '' }}">
-                  <i class="far fa-eye nav-icon"></i>
-                  <p>view</p>
-                </a>
-              </li>
-            </ul>
-          </li>
+          @if (auth()->user()->role == 'admin')
+
+            <li class="nav-item {{ request()->is('teacher') ? 'menu-open' : '' }}">
+              <a href="{{route('teacher.index')}}" class="nav-link {{ request()->is('teacher') ? 'active' : '' }}">
+                <i class="nav-icon fa-solid fa-user"></i>
+                <p>
+                  Teacher
+                  {{-- <i class="right fas fa-angle-left"></i> --}}
+                </p>
+              </a>
+              {{-- <ul class="nav nav-treeview">
+                <li class="nav-item ">
+                  <a href="{{route('teacher.index')}}" class="nav-link {{ request()->is('teacher') ? 'active' : '' }}">
+                    <i class="far fa-eye nav-icon"></i>
+                    <p>view</p>
+                  </a>
+                </li>
+              </ul> --}}
+            </li>
+          
+              
+          @endif
           <li class="nav-item ">
             <a href="#" class="nav-link ">
               <i class="nav-icon fa-solid fa-gear"></i>
