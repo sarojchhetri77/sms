@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\book;
 use App\Models\grade;
+use App\Models\teacher;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -20,8 +21,9 @@ class BookController extends Controller
             })->paginate(10);
         } else {
             $books = book::with('grades')->paginate(10);
+            $teachers = teacher::with('user')->get();
         }
-        return view('backend.books.main', compact('books', 'search'));
+        return view('backend.books.main', compact('books', 'search','teachers'));
     }
 
     /**
@@ -30,6 +32,7 @@ class BookController extends Controller
     public function create()
     {   
         $grades = grade::all();
+        
         return view('backend.books.create',compact('grades'));
     }
 

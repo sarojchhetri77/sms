@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('address');
             $table->enum('gender',['male','female']);
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
 
         });
     }

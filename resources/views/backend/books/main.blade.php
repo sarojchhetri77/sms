@@ -12,6 +12,73 @@
                     <a href="{{ route('book.index') }}" class="btn btn-primary btn-sm"> <i
                             class="fa-solid fa-arrow-left px-1"></i>Go Back</a>
                     @endif
+
+                    {{-- assign book to teacher button --}}
+                    <a href="#" class="btn-sm btn btn-success" data-bs-toggle="modal"
+                    data-bs-target="#studentModalEdit_1"><i
+                        class="fa fa-plus px-1"></i> Assign Teacher</a>
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="studentModalEdit_1" tabindex="-1"
+                    role="dialog" aria-labelledby="studentModalLabel_1 }}"
+                    aria-hidden="true">
+                    <div class="modal-dialog  modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">
+                                    Edit book
+                                </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action=""
+                                    method="POST">
+                                    @csrf
+                                    @method('put')
+                                    <div class="form-group">
+                                        <label>Select Book</label>
+                                        
+                                        <select class="form-control" name="class_id" style="width: 100%;">
+                                            @foreach ($books as $book)
+                                            
+                                            <option value="{{$book->id}}">{{$book->name}} of class {{$book->grades->name}}</option>
+                                            @endforeach
+                                              
+                                          
+                                          
+                                        </select>
+                                      </div>
+                                      <div class="form-group">
+                                        <label>Select Teacher</label>
+                                        <select class="form-control" name="class_id" style="width: 100%;">
+                                         
+                                          @foreach ($teachers as $teacher)
+                                              
+                                          <option value="{{$teacher->id}}">{{$teacher->user->name}}</option>
+                                          @endforeach
+                                        
+                                              
+                                          
+                                          
+                                        </select>
+                                      </div>
+
+
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary"
+                                            data-bs-dismiss="modal">Submit</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </form>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
         </div>
         <div class="card">
             <div class="card-header">
