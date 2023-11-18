@@ -61,6 +61,7 @@ class TeacherController extends Controller
             $teacher->dob = $request->dob;
             $teacher->address = $request->address;
             $teacher->phone = $request->phone;
+            $teacher->gender = $request->gender;
             $teacher->hired_at = $request->hired;
             $teacher->user_id = $user->id;
             $teacher->save();

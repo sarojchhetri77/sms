@@ -57,6 +57,17 @@
                   <label for="cpassword">Confirm Password</label>
                   <input type="password" name="cpassword" class="form-control" id="cpassword" placeholder="Password">
                 </div>
+                <div class="form-group mb-0">
+                  <label for="gender">Select Gender</label>
+                  <div class="custom-control custom-radio">
+                    <input type="radio" name="gender" value="male" class="custom-control-input" id="male">
+                    <label class="custom-control-label" for="male">male</label>
+                  </div>
+                  <div class="custom-control custom-radio">
+                    <input type="radio" name="gender" value="female" class="custom-control-input" id="female">
+                    <label class="custom-control-label" for="female">female</label>
+                  </div>
+                </div>
               
               </div>
               <!-- /.card-body -->

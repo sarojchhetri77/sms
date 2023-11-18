@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\ExamController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
@@ -21,9 +23,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('login');
 });
-Route::get('/advance',function(){
-    return view('backend.pages.forms.validation');
-});
+// Route::get('/advance',function(){
+//     return view('backend.pages.forms.validation');
+// });
 
 
 
@@ -33,6 +35,8 @@ Route::get('/advance',function(){
     Route::resource('student',StudentController::class);
     Route::resource('grade',GradeController::class);
     Route::resource('book',BookController::class);
+    Route::resource('exam',ExamController::class);
+    Route::resource('attendance',AttendanceController::class);
   });
 
 

@@ -52,12 +52,17 @@
                   <label for="cpassword">Confirm Password</label>
                   <input type="password" name="cpassword" class="form-control" id="cpassword" placeholder="Password">
                 </div>
-                {{-- <div class="form-group mb-0">
-                  <div class="custom-control custom-checkbox">
-                    <input type="checkbox" name="terms" class="custom-control-input" id="exampleCheck1">
-                    <label class="custom-control-label" for="exampleCheck1">I agree to the <a href="#">terms of service</a>.</label>
+                <div class="form-group mb-0">
+                  <label for="gender">Select Gender</label>
+                  <div class="custom-control custom-radio">
+                    <input type="radio" name="gender" value="male" class="custom-control-input" id="male">
+                    <label class="custom-control-label" for="male">male</label>
                   </div>
-                </div> --}}
+                  <div class="custom-control custom-radio">
+                    <input type="radio" name="gender" value="female" class="custom-control-input" id="female">
+                    <label class="custom-control-label" for="female">female</label>
+                  </div>
+                </div>
               </div>
               <!-- /.card-body -->
               <div class="card-footer">

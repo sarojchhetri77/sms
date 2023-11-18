@@ -17,7 +17,7 @@ return new class extends Migration
             $table->date('dob');
             $table->string('phone');
             $table->string('address');
-            $table->enum('gender',['male','female']);
+            $table->string('gender');
             $table->date('hired_at');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');

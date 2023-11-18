@@ -12,7 +12,8 @@ class ExamController extends Controller
      */
     public function index()
     {
-        //
+        $exams = exam::paginate(10);
+        return view('backend.exams.main',compact('exams'));
     }
 
     /**
@@ -20,7 +21,7 @@ class ExamController extends Controller
      */
     public function create()
     {
-        //
+       return view('backend.exams.create');
     }
 
     /**
@@ -28,7 +29,14 @@ class ExamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+        $exam = new exam();
+        $exam->name = $request->name;
+        $exam->date = $request->date;
+        $exam->save();
+        return redirect()->route('exam.index'); 
     }
 
     /**

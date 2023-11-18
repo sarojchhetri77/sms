@@ -66,6 +66,7 @@ class StudentController extends Controller
             $student->dob = $request->dob;
             $student->address = $request->address;
             $student->phone = $request->phone;
+            $student->gender = $request->gender;
             $student->user_id = $user->id;
             $student->save();
             // code to enroll student  in class

@@ -10,7 +10,15 @@ class attendance extends Model
     use HasFactory;
     protected $fillable = [
         'student_id',
+        'class_id',
         'date',
         'status'
     ];
+    public function student(){
+        return $this->belongsTo(student::class,'student_id');
+    }
+    public function grade(){
+        return $this->belongsTo(grade::class);
+    }
+
 }
