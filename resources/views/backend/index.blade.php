@@ -78,14 +78,17 @@
       </div>
       <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
     </div>
+  </div>
     @endif
+    @if (auth()->user()->role == "teacher")
+        
     <div class="col-lg-3 col-6">
       <!-- small box -->
       <div class="small-box bg-danger">
         <div class="inner">
-          {{-- <h3>65</h3> --}}
+          <h3>15</h3>
   
-          <p>Attendence</p>
+          <p> Take Attendence</p>
         </div>
         <div class="icon">
           <i class="ion fa-solid fa-book"></i>
@@ -93,6 +96,8 @@
         <a href="{{route('attendance.create')}}" class="small-box-footer">Take Attendence<i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
+    @endif
+
   </div>
   <!-- ./col -->
 </div>
