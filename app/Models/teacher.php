@@ -28,4 +28,7 @@ class teacher extends Model
     {
         return $this->hasMany(assign_book::class, 'teacher_id');
     }
+    public function attendance(){
+        return $this->hasMany(attendance::class);
+    }
 }
