@@ -37,6 +37,7 @@ Route::get('/', function () {
     Route::resource('book',BookController::class);
     Route::resource('exam',ExamController::class);
     Route::resource('attendance',AttendanceController::class);
+    Route::get('record', [AttendanceController::class, 'record'])->name('attendance.records');
   });
 
 

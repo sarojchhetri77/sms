@@ -6,15 +6,31 @@ use App\Models\attendance;
 use App\Models\enrollment;
 use App\Models\grade;
 use App\Models\student;
+use App\Models\teacher;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use PHPUnit\Framework\ComparisonMethodDoesNotAcceptParameterTypeException;
+
 
 class AttendanceController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    public function record(){
+        $uid = auth()->user()->id;
+        if(auth()->user()->role == "teacher"){
+            $teachers = teacher::where('user_id',$uid)->first();
+            $tid = $teachers->id;
+            $attendances = Attendance::with('teacher','student','grade')->where('teacher_id',$tid)->get();
+            return view('backend.attendance.view',compact('attendances'));
+        }
+       
+        
+    
+        
+    }
+
+
     public function index(request $request)
     {
         $search = $request['search'] ?? "";
@@ -87,7 +103,7 @@ class AttendanceController extends Controller
      */
     public function show(attendance $attendance)
     {
-        return 1;
+    
     }
 
     /**
@@ -114,3 +130,4 @@ class AttendanceController extends Controller
         //
     }
 }
+

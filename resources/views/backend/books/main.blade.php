@@ -10,6 +10,24 @@
                 <a href="{{ route('book.index') }}" class="btn btn-primary btn-sm"> <i
                         class="fa-solid fa-arrow-left px-1"></i>Go Back</a>
             @endif
+            <!-- notification for the delete successful -->
+            @if (session('dsuccess'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('dsuccess') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+            <!-- notification for teacher assign successfull -->
+            @if (session('tsuccess'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('tsuccess') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
 
             {{-- assign book to teacher button --}}
             <a href="#" class="btn-sm btn btn-success" data-bs-toggle="modal" data-bs-target="#studentModalEdit_1"><i

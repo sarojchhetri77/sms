@@ -47,7 +47,7 @@ class BookController extends Controller
            $assign->teacher_id = $request->teacher_id;
            $assign->book_id = $request->book_id;
            $assign->save();
-           return redirect()->route('book.index')->with("message","teacher is assign successfully");
+           return redirect()->route('book.index')->with("tsuccess","teacher is assign successfully");
     }
     else{
 
@@ -55,7 +55,7 @@ class BookController extends Controller
         $book->name = $request->name;
         $book->class_id = $request->class_id;
         $book->save();
-        return redirect()->route('book.index');
+        return redirect()->route('book.create')->with('bsuccess',"book is added successfully");
     }
 
     }
@@ -90,6 +90,6 @@ class BookController extends Controller
     public function destroy(book $book)
     {
        $book->delete();
-       return  redirect()->route('book.index');
+       return  redirect()->route('book.index')->with('dsuccess','book is removed successfully');
     }
 }

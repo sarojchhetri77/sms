@@ -8,22 +8,8 @@
             <!-- left column -->
             <div class="col-md-12">
                 <div class="py-2">
-                    <form action="" class="d-inline">
-                        <div class="input-group input-group-sm" style="width: 300px;">
-
-                            @csrf
-                            <input type="search" name="search" class="form-control float-right text-secondary"
-                                placeholder="date">
-
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-primary">
-                                    Generate
-                                </button>
-                            </div>
-
-                        </div>
-                    </form>
-
+                    <a href="{{ route('attendance.create') }}" class="btn btn-primary"> <i
+                            class="far fa-plus px-1"></i>create</a>
                 </div>
                 <div class="card card-primary">
                     <div class="card-header">
@@ -38,17 +24,19 @@
                                     <th>Name</th>
                                     <th>Teacher</th>
                                     <th>class</th>
+                                    <th>Date</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
-                               
+
                                 @foreach ($attendances as $attendance)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $attendance->student->user->name }}</td>
-                                        <td>{{$attendance->teacher->user->name}}</td>
-                                        <td>{{$attendance->grade->name }}</td>
+                                        <td>{{ $attendance->teacher->user->name }}</td>
+                                        <td>{{ $attendance->grade->name }}</td>
+                                        <td>{{ $attendance->date }}</td>
                                         <td>
                                             {{ $attendance->status == '1' ? 'present' : 'absent' }}
                                         </td>
