@@ -17,8 +17,9 @@
                                 @csrf
                         <div class="input-group input-group-sm" style="width: 250px;">
 
-                        
+                        <label for="" class=" me-2">select subject:</label>
                             <select name="subject" id="" class="form-control">
+            
                                 @foreach($books as $book)
                                 <option value="{{$book->id}}">{{$book->name}}</option>
                                 @endforeach
