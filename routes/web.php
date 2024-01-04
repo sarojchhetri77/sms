@@ -6,6 +6,7 @@ use App\Http\Controllers\ExamController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\ResultController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +38,7 @@ Route::get('/', function () {
     Route::resource('book',BookController::class);
     Route::resource('exam',ExamController::class);
     Route::resource('attendance',AttendanceController::class);
+    Route::resource('result',ResultController::class);
     Route::get('record', [AttendanceController::class, 'record'])->name('attendance.records');
   });
 

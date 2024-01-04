@@ -3,8 +3,7 @@
 @section('page-title', 'view attendance')
 @section('content')
 
-    <section class="content">
-        <div class="container-fluid">
+    
             <!-- left column -->
             <div class="col-md-12">
                 <div class="py-2">
@@ -70,8 +69,7 @@
 
                 <!-- /.card -->
             </div>
-        </div><!-- /.container-fluid -->
-    </section>
+      
 
 
 

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\result;
 use Illuminate\Http\Request;
+use App\Models\grade;
+use App\Models\book;
+use App\Models\enrollment;
 
 class ResultController extends Controller
 {
@@ -20,7 +23,15 @@ class ResultController extends Controller
      */
     public function create()
     {
-        //
+        $auth_id = auth()->user()->teacher->id;
+        $class = grade::where('teacher_id', $auth_id)->first();
+        if ($class) {
+            $students = enrollment::where('class_id', $class->id)->with('student.user')->get();
+            $books = book::where('class_id',$class->id)->get();
+            return view('backend.results.create', compact('students','books'));
+        } else {
+            return redirect()->route('home');
+        }
     }
 
     /**

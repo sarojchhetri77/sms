@@ -65,6 +65,21 @@
       <a href="{{route('book.index')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
     </div>
   </div>
+  <!-- ./col -->
+  <div class="col-lg-3 col-6">
+    <!-- small box -->
+    <div class="small-box bg-primary">
+      <div class="inner">
+        <h3>65</h3>
+
+        <p>Exam</p>
+      </div>
+      <div class="icon">
+        <i class="ion fa-solid fa-book"></i>
+      </div>
+      <a href="{{route('exam.index')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
   <div class="col-lg-3 col-6">
     <!-- small box -->
     <div class="small-box bg-danger">
@@ -94,6 +109,20 @@
           <i class="ion fa-solid fa-book"></i>
         </div>
         <a href="{{route('attendance.create')}}" class="small-box-footer">Take Attendence<i class="fas fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+    <div class="col-lg-3 col-6">
+      <!-- small box -->
+      <div class="small-box bg-success">
+        <div class="inner">
+          <h3>15</h3>
+  
+          <p>prepare result</p>
+        </div>
+        <div class="icon">
+          <i class="ion fa-solid fa-book"></i>
+        </div>
+        <a href="{{route('result.create')}}" class="small-box-footer">Take Attendence<i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
     @endif

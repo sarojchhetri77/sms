@@ -16,16 +16,22 @@
                         <h3 class="card-title">View ATTENDANCE</h3>
                     </div>
                     <!-- /.card-header -->
+                    @php
+                        $currentDate = \Carbon\Carbon::now();
+                        $daysInMonth = $currentDate->daysInMonth;
+                    @endphp
                     <div class="card-body table-responsive p-0">
                         <table class="table text-nowrap text-center">
                             <thead>
                                 <tr>
                                     <th>ID</th>
                                     <th>Name</th>
-                                    <th>Teacher</th>
-                                    <th>class</th>
-                                    <th>Date</th>
-                                    <th>Status</th>
+
+                                    @for ($day = 1; $day <= $daysInMonth; $day++)
+                                        <td>{{ $currentDate->setDay($day)->format('Y/n/j') }}</td>
+                                        <!-- Other table cells if any -->
+                                    @endfor
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -34,12 +40,9 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $attendance->student->user->name }}</td>
-                                        <td>{{ $attendance->teacher->user->name }}</td>
-                                        <td>{{ $attendance->grade->name }}</td>
-                                        <td>{{ $attendance->date }}</td>
-                                        <td>
-                                            {{ $attendance->status == '1' ? 'present' : 'absent' }}
-                                        </td>
+
+
+
 
                                         <!-- Add other columns as needed -->
                                     </tr>
