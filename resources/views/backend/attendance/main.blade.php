@@ -11,9 +11,10 @@
                         <div class="input-group input-group-sm" style="width: 300px;">
 
                             @csrf
-                            <input type="search" name="search" class="form-control float-right text-secondary"
-                                placeholder="date">
-
+                                
+                           
+                            <input type="search" name="search" value="{{$search? $search : ""}}" class="form-control float-right text-secondary"
+                                placeholder="2023-11-29">
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-primary">
                                     Generate
@@ -24,9 +25,17 @@
                     </form>
 
                 </div>
+                @foreach ($classes as $classId=> $class)
+                <?php
+                $classs = $class->first()->grade;
+                // $class_name = $classs ? $classs->name : 'Unknown';
+              ?>  
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">View ATTENDANCE</h3>
+                      
+                          
+                      <h3 class="card-title">{{$classs->name}}</h3>
+                      
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body table-responsive p-0">
@@ -42,7 +51,7 @@
                             </thead>
                             <tbody>
                                
-                                @foreach ($attendances as $attendance)
+                                @foreach ($class as $attendance)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $attendance->student->user->name }}</td>
@@ -66,7 +75,7 @@
                     </div>
 
                 </div>
-
+                @endforeach
                 <!-- /.card -->
             </div>
       

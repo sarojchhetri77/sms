@@ -91,7 +91,7 @@
       <div class="icon">
         <i class="ion ion-pie-graph"></i>
       </div>
-      <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      <a href="{{route('attendance.index')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
     </div>
   </div>
     @endif
@@ -122,7 +122,7 @@
         <div class="icon">
           <i class="ion fa-solid fa-book"></i>
         </div>
-        <a href="{{route('result.create')}}" class="small-box-footer">Take Attendence<i class="fas fa-arrow-circle-right"></i></a>
+        <a href="{{route('result.create')}}" class="small-box-footer">Prepare Result<i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
     @endif

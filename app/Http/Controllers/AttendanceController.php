@@ -36,11 +36,16 @@ class AttendanceController extends Controller
         $search = $request['search'] ?? "";
         if ($search != "") {
             $attendances = Attendance::with('grade', 'teacher', 'student')->where('date', $search)->get();
+            $classes = $attendances->groupBy('class_id');
+           
+            
 
-            return view('backend.attendance.main', compact('attendances'));
+            return view('backend.attendance.main', compact('search','classes'));
         } else {
-            $attendances = [];
-            return view('backend.attendance.main', Compact('attendances'));
+           
+            $classes = [];
+            $search = [];
+            return view('backend.attendance.main', Compact('classes','search'));
         }
     }
 
