@@ -11,6 +11,10 @@ class result extends Model
     protected $fillable = [
         'student_id',
         'subject_id',
+        'exam_id',
         'marks'
     ];
+    public function exam(){
+        $this->belongsTo(exam::class);
+    }
 }

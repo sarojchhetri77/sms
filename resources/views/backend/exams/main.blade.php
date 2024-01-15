@@ -1,5 +1,5 @@
 @extends('backend.layouts.main')
-@section('content-title', 'Grade')
+@section('content-title', 'EXAM')
 @section('page-title', 'view exam')
 @section('content')
     <div class="col-12">
@@ -10,25 +10,8 @@
         </div>
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">VIEW CLASS</h3>
+                <h3 class="card-title">VIEW EXAMS</h3>
 
-                {{-- <div class="card-tools">
-                    <form action="" class="d-inline">
-                        <div class="input-group input-group-sm" style="width: 250px;">
-
-                            @csrf
-                            <input type="search" name="search" class="form-control float-right text-secondary"
-                                placeholder="Search with name" value="{{ $search }}">
-
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
-
-                        </div>
-                    </form>
-                </div> --}}
             </div>
             <!-- /.card-header -->
             <div class="card-body table-responsive p-0">
@@ -158,7 +141,7 @@
                         @else
                             <tr>
                                 <td colspan="6">
-                                    <h3> No Classes are added</h3>
+                                    <h3> No Exams are added</h3>
                                 </td>
                                 <!-- Adjust colspan based on the number of columns in your table -->
                             </tr>

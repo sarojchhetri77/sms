@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\grade;
 use App\Models\book;
 use App\Models\enrollment;
+use App\Models\exam;
 
 class ResultController extends Controller
 {
@@ -14,8 +15,9 @@ class ResultController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //
+    { $uid = auth()->user()->id;
+        $results = result::with('subject')->where('student_id',$uid)->get();      
+        return view('backend.results.main','result');
     }
 
     /**
@@ -28,7 +30,8 @@ class ResultController extends Controller
         if ($class) {
             $students = enrollment::where('class_id', $class->id)->with('student.user')->get();
             $books = book::where('class_id',$class->id)->get();
-            return view('backend.results.create', compact('students','books'));
+            $exams = exam::all();
+            return view('backend.results.create', compact('students','books','exams'));
         } else {
             return redirect()->route('home');
         }
@@ -38,8 +41,22 @@ class ResultController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
+    { 
+    
+        $request->validate([
+
+            'marks'   => 'required'
+        ]);
+        foreach($request->marks as $studentid => $mark){
+            result::create([
+                'exam_id' => $request->exam,
+                'student_id' => $studentid,
+                'subject_id' => $request->subject,
+                'marks'=> $mark,
+            ]);
+        }
+        return redirect()->route('result.create')->with('success', 'marks added sucessfully');
+        
     }
 
     /**

@@ -10,6 +10,10 @@ class exam extends Model
     use HasFactory;
     protected $fillable = [
         'name',
-        'date'
+        'date',
+        
     ];
+    public function result(){
+        $this->hasMany(result::class);
+    }
 }
