@@ -16,8 +16,10 @@ class ResultController extends Controller
      */
     public function index()
     { $uid = auth()->user()->id;
-        $results = result::with('subject')->where('student_id',$uid)->get();      
+        $results = result::with('subject')->where('student_id',$uid)->get(); 
+        $ghfg=$results;     
         return view('backend.results.main','result');
+
     }
 
     /**
