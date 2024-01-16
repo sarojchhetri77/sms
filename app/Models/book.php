@@ -18,7 +18,8 @@ class book extends Model
     public function assignteacher(){
         return $this->hasMany(assign_book::class,'book_id');
     }
-    public function result(){
-        return $this->hasMany(result::class);
+    public function results()
+    {
+        return $this->hasMany(Result::class,'subject_id');
     }
 }

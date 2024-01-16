@@ -8,17 +8,26 @@ use App\Models\grade;
 use App\Models\book;
 use App\Models\enrollment;
 use App\Models\exam;
+use Illuminate\Support\Facades\Auth;
 
 class ResultController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    { $uid = auth()->user()->id;
-        $results = result::with('subject')->where('student_id',$uid)->get(); 
-        $ghfg=$results;     
-        return view('backend.results.main','result');
+    public function index() 
+    {   if(auth()->user()->role == "student"){
+
+        $user = Auth::user(); // Get the currently authenticated user
+    
+        $studentId = $user->student->id;
+        $results = Result::where('student_id',$studentId)->with('books')->get();
+            return view('backend.results.main', compact('results'));
+
+    } 
+    else{
+        return redirect()->back();
+    }
 
     }
 

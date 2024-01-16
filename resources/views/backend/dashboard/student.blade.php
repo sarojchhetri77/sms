@@ -9,7 +9,7 @@
         <div class="icon">
             <i class="ion fa-solid fa-book"></i>
         </div>
-        <a href="{{ route('result.index') }}" class="small-box-footer">Prepare Result<i
+        <a href="{{ route('result.index') }}" class="small-box-footer">view Result<i
                 class="fas fa-arrow-circle-right"></i></a>
     </div>
 </div>

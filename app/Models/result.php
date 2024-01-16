@@ -15,6 +15,9 @@ class result extends Model
         'marks'
     ];
     public function exam(){
-        $this->belongsTo(exam::class);
+       return  $this->belongsTo(exam::class);
+    }
+    public function books(){
+       return  $this->belongsTo(book::class,'subject_id');
     }
 }
