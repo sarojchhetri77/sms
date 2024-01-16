@@ -25,11 +25,13 @@
                     </form>
 
                 </div>
+               @if(auth()->user()->role=="admin")
                 @foreach ($classes as $classId=> $class)
                 <?php
                 $classs = $class->first()->grade;
                 // $class_name = $classs ? $classs->name : 'Unknown';
-              ?>  
+              ?> 
+             
                 <div class="card card-primary">
                     <div class="card-header">
                       
@@ -76,7 +78,56 @@
 
                 </div>
                 @endforeach
+                @endif
                 <!-- /.card -->
+                <!-- if the user is teacher -->
+                @if(auth()->user()->role=="teacher")
+                <div class="card card-primary">
+                    <div class="card-header">
+                      
+                          
+                      <h3 class="card-title">VIEW ATTENDANCE</h3>
+                      
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body table-responsive p-0">
+                        <table class="table text-nowrap text-center">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Teacher</th>
+                                    <th>class</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                               
+                                @foreach ($attendances as $attendance)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $attendance->student->user->name }}</td>
+                                        <td>{{$attendance->teacher->user->name}}</td>
+                                        <td>{{$attendance->grade->name }}</td>
+                                        <td>
+                                            {{ $attendance->status == '1' ? 'present' : 'absent' }}
+                                        </td>
+
+                                        <!-- Add other columns as needed -->
+                                    </tr>
+                                @endforeach
+
+
+                                <!-- Adjust colspan based on the number of columns in your table -->
+
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+                @endif
             </div>
       
 

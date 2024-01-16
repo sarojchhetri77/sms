@@ -9,7 +9,7 @@ use App\Models\student;
 use App\Models\teacher;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class AttendanceController extends Controller
 {
@@ -35,17 +35,26 @@ class AttendanceController extends Controller
     {
         $search = $request['search'] ?? "";
         if ($search != "") {
-            $attendances = Attendance::with('grade', 'teacher', 'student')->where('date', $search)->get();
-            $classes = $attendances->groupBy('class_id');
-           
-            
+            if(auth()->user()->role == "admin"){
 
-            return view('backend.attendance.main', compact('search','classes'));
-        } else {
-           
+                $attendances = Attendance::with('grade', 'teacher', 'student')->where('date', $search)->get();
+                $classes = $attendances->groupBy('class_id');
+                return view('backend.attendance.main', compact('search','classes'));
+            }
+           if(auth()->user()->role == "teacher"){
+                $uid = auth()->user()->id;
+                $teacher=teacher::where('user_id',$uid)->first();
+                $class = grade::where('teacher_id',$teacher->id)->first();
+                $attendances = Attendance::with('grade', 'teacher', 'student')->where('date', $search)->where('class_id',$class->id)->get();
+                return view('backend.attendance.main', compact('search','attendances'));
+        
+           }
+        } 
+        else {
+           $attendances = [];
             $classes = [];
             $search = [];
-            return view('backend.attendance.main', Compact('classes','search'));
+            return view('backend.attendance.main', Compact('classes','search','attendances'));
         }
     }
 
