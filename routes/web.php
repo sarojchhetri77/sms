@@ -40,6 +40,7 @@ Route::get('/', function () {
     Route::resource('attendance',AttendanceController::class);
     Route::resource('result',ResultController::class);
     Route::get('record', [AttendanceController::class, 'record'])->name('attendance.records');
+    Route::get('results/{id}', [ResultController::class, 'index'])->name('results');
   });
 
 

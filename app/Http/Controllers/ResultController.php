@@ -15,13 +15,14 @@ class ResultController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index() 
-    {   if(auth()->user()->role == "student"){
+    public function index($id) 
+    {  
+         if(auth()->user()->role == "student"){
 
         $user = Auth::user(); // Get the currently authenticated user
     
         $studentId = $user->student->id;
-        $results = Result::where('student_id',$studentId)->with('books')->get();
+        $results = Result::where('student_id',$studentId)->where('exam_id',$id)->with('books')->get();
             return view('backend.results.main', compact('results'));
 
     } 

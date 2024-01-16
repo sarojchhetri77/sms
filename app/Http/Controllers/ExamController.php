@@ -13,7 +13,7 @@ class ExamController extends Controller
     public function index()
     {
         $exams = exam::paginate(10);
-        return view('backend.exams.main',compact('exams'));
+        return view('backend.exams.main', compact('exams'));
     }
 
     /**
@@ -21,7 +21,7 @@ class ExamController extends Controller
      */
     public function create()
     {
-       return view('backend.exams.create');
+        return view('backend.exams.create');
     }
 
     /**
@@ -35,8 +35,9 @@ class ExamController extends Controller
         $exam = new exam();
         $exam->name = $request->name;
         $exam->date = $request->date;
+        $exam->status = 0;
         $exam->save();
-        return redirect()->route('exam.index'); 
+        return redirect()->route('exam.index');
     }
 
     /**
@@ -60,7 +61,20 @@ class ExamController extends Controller
      */
     public function update(Request $request, exam $exam)
     {
-        //
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'date' => 'required|date', 
+            'status' => 'required|in:0,1',
+        ]);
+    
+        $exam->name = $request->input('name', $exam->name);
+        $exam->date = $request->input('date', $exam->date);
+        $exam->status = $request->input('status', $exam->status);
+    
+        $exam->update();
+
+        return redirect()->route('exam.index')->with('success', 'Exam updated successfully');
     }
 
     /**

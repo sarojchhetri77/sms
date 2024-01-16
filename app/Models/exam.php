@@ -11,6 +11,7 @@ class exam extends Model
     protected $fillable = [
         'name',
         'date',
+        'status',
         
     ];
     public function result(){
