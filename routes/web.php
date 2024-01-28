@@ -9,6 +9,8 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\ResultController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\CheckUserRole;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,24 +26,20 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('login');
 });
-// Route::get('/advance',function(){
-//     return view('backend.pages.forms.validation');
-// });
-
 
 
 // resource route
-  Route::middleware(['auth'])->group(function(){
+  Route::middleware(['auth',\App\Http\Middleware\CheckUserRole::class])->group(function(){
     Route::resource('teacher',TeacherController::class);
     Route::resource('student',StudentController::class);
     Route::resource('grade',GradeController::class);
     Route::resource('book',BookController::class);
     Route::resource('exam',ExamController::class);
     Route::resource('attendance',AttendanceController::class);
-    Route::resource('result',ResultController::class);
-    Route::get('record', [AttendanceController::class, 'record'])->name('attendance.records');
-    Route::get('results/{id}', [ResultController::class, 'index'])->name('results');
+    Route::resource('result', ResultController::class);
   });
+  Route::get('record', [AttendanceController::class, 'record'])->name('attendance.records');
+  Route::get('results/{id}', [ResultController::class, 'index'])->name('results');
 
 
 Auth::routes();

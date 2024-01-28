@@ -45,7 +45,7 @@
                                             ->where('student_id', $studentAttendance->student_id)
                                             ->where('date', $currentDate->setDay($day)->toDateString())
                                             ->first();
-                                        $status = $attendanceOfDay ? ($attendanceOfDay->status == 1 ? 'Present' : 'Absent') : null;
+                                        $status = $attendanceOfDay ? ($attendanceOfDay->status == 1 ? 'Present' : 'Absent') : 'NT';
                                         @endphp
                                         <td>{{ $status }}</td>
                                     @endfor

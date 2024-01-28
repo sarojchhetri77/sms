@@ -27,7 +27,7 @@ class ResultController extends Controller
 
     } 
     else{
-        return redirect()->back();
+        return "hello";
     }
 
     }

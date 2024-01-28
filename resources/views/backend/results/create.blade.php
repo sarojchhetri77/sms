@@ -5,7 +5,6 @@
     <div class="col-12">
         <div class="py-2">
 
-            <a href="{{ route('result.index') }}" class="btn btn-primary btn-sm"> <i class="fa-solid fa-plus px-1"></i>view</a>
             <form action="{{ route('result.store') }}" method="POST">
                 @csrf
                 <div class="d-flex p-1">
