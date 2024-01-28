@@ -3,12 +3,14 @@
 @section('page-title', 'view exam')
 @section('content')
 <div class="col-12">
+@if(auth()->user()->role == "admin")
     <div class="py-2">
 
         <a href="{{ route('exam.create') }}" class="btn btn-primary btn-sm"> <i class="fa-solid fa-plus px-1"></i>Add</a>
     </div>
+    @endif
     <div class="card">
-        <div class="card-header">
+        <div class="card-header bg-primary">
             <h3 class="card-title">VIEW EXAMS</h3>
 
         </div>
@@ -36,7 +38,7 @@
                         <td>{{ $exam->name }}</td>
                         <td>{{ $exam->date }}
                             @if($exam->status == 1 && auth()->user()->role !== "admin" )
-                            <a href="{{route('results',$exam->id)}}" class="btn-sm btn btn-secondary ms-1"><i class="fa fa-eye px-1"></i> result</a>
+                            <a href="{{route('results',$exam->id)}}" class="btn-sm btn btn-primary ms-3"><i class="fa fa-eye px-1"></i> result</a>
                             @endif
                         </td>
                         @if(auth()->user()->role == "admin")

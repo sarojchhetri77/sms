@@ -18,13 +18,16 @@ class AttendanceController extends Controller
      */
     public function record(){
         $uid = auth()->user()->id;
-        if(auth()->user()->role == "teacher"){
-            $teachers = teacher::where('user_id',$uid)->first();
-            $tid = $teachers->id;
-            $attendances = Attendance::with('teacher','student','grade')->where('teacher_id',$tid)->get();
-            return view('backend.attendance.view',compact('attendances'));
+
+        if (auth()->user()->role == "teacher") {
+            $teacher = Teacher::where('user_id', $uid)->first();
+        
+            if ($teacher) {
+                $attendances = $teacher->attendance()->with('student', 'grade')->get();
+        
+                return view('backend.attendance.view', compact('attendances'));
+            }
         }
-       
         
     
         

@@ -6,6 +6,7 @@
 
 <!-- left column -->
 <div class="col-md-12">
+    @if(auth()->user()->role !== "student")
     <div class="py-2">
         <form action="" class="d-inline">
             <div class="input-group input-group-sm" style="width: 300px;">
@@ -34,15 +35,11 @@
                         </button>
                     </div>
                 </div>
-
-
-
-
             </div>
         </form>
 
     </div>
-
+    @endif
 
     <div class="card card-primary">
         <div class="card-header">
@@ -69,7 +66,7 @@
                         <td>{{$loop->iteration}}</td>
                         <td>{{ $result->books->name}}</td>
                         <td>{{$result->marks}}</td>
-                        
+
 
                         <!-- Add other columns as needed -->
                     </tr>
