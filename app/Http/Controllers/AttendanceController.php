@@ -10,6 +10,9 @@ use App\Models\teacher;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PDF;
+use App\Exports\UserExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AttendanceController extends Controller
 {
@@ -145,6 +148,25 @@ class AttendanceController extends Controller
     public function destroy(attendance $attendance)
     {
         //
+    }
+    public function export_pdf(){
+        $uid = auth()->user()->id;
+
+        // Retrieve the teacher associated with the user
+        $teacher = Teacher::where('user_id', $uid)->first();
+        
+        // Retrieve attendance data for the teacher, including relationships
+        $attendances = $teacher->attendance()->with('student', 'grade')->get();
+        
+        // Load the 'pdf.attendance' view and pass the attendance data
+        $pdf = PDF::loadView('pdf.attendance', ['attendances' => $attendances]);
+        
+        // Download the generated PDF with the filename 'attendance.pdf'
+        return $pdf->download('attendance.pdf');
+
+    }
+    public function export_excel(){
+        return Excel::download(new UserExport, 'users.xlsx');
     }
 }
 

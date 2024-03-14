@@ -9,6 +9,7 @@
         <div class="col-md-12">
             <div class="py-2">
                 <a href="{{ route('attendance.create') }}" class="btn btn-primary"> <i class="far fa-plus px-1"></i>create</a>
+                <a href="{{ route('export-pdf') }}" class="btn btn-primary"><i class="fa-solid fa-file-export"></i>Export Pdf</a>
             </div>
             <div class="card card-primary">
                 <div class="card-header">

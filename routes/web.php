@@ -40,6 +40,7 @@ Route::get('/', function () {
   });
   Route::get('record', [AttendanceController::class, 'record'])->name('attendance.records');
   Route::get('results/{id}', [ResultController::class, 'index'])->name('results');
+  Route::get('export-pdf',[AttendanceController::class,'export_pdf'])->name('export-pdf');
 
 
 Auth::routes();
