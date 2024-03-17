@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StudentStoreRequest;
+use App\Http\Requests\StudentUpdateRequest;
 use App\Models\enrollment;
 use App\Models\grade;
 use App\Models\student;
@@ -19,16 +20,15 @@ class StudentController extends Controller
     {
         $search = $request['search'] ?? "";
         if ($search != "") {
-            $students = student::with('user','enrollment.grade')
+            $students = student::with('user', 'enrollment.grade')
                 ->whereHas('user', function ($query) use ($search) {
                     $query->where('name', 'LIKE', "%$search%");
                 })->orWhereHas('enrollment.grade', function ($query) use ($search) {
                     $query->where('name', 'LIKE', "%$search%");
                 })->paginate(10);
-        } 
-        else {
+        } else {
 
-            $students =student::with('user','enrollment.grade')->paginate(10);
+            $students = student::with('user', 'enrollments.grade')->paginate(10);
         }
         return view('backend.student.main', compact('students', 'search'));
     }
@@ -37,9 +37,9 @@ class StudentController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {   
+    {
         $classes =  grade::all();
-        return view('backend.student.create',compact('classes'));
+        return view('backend.student.create', compact('classes'));
     }
 
     /**
@@ -52,7 +52,7 @@ class StudentController extends Controller
         // storing email and password in user table or creating the user
 
 
-        if ($request->password == $request->cpassword){
+        if ($request->password == $request->cpassword) {
             $user = new User();
             $user->name = $request->name;
             $user->email = $request->email;
@@ -75,13 +75,11 @@ class StudentController extends Controller
             $enrollment->class_id = $request->grade_id;
             $enrollment->save();
             return redirect()->route('student.index')->with('success', 'student created successfully');
-            
-        } 
-        else {
+        } else {
             return redirect()->route('student.create')->with('failed', 'enter same password');
         }
     }
-    
+
 
     /**
      * Display the specified resource.
@@ -102,9 +100,19 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, student $student)
+    public function update(StudentUpdateRequest $request, $id)
     {
-        //
+        //       if($request->has('user_id')){
+        //         $user = User::findorFail('user_id');
+        //       }
+        // $student = student::findorFail($id);
+        // $student->dob = $request->dob;
+        // $student->address = $request->address;
+        // $student->phone = $request->phone;
+        // $student->gender = $request->gender;
+
+
+
     }
 
     /**
@@ -112,7 +120,9 @@ class StudentController extends Controller
      */
     public function destroy(student $student)
     {
-         $student->delete();
-         return redirect()->route('student.index');
+        $student->enrollments()->delete();
+        $student->delete();
+       
+        return redirect()->route('student.index');
     }
 }

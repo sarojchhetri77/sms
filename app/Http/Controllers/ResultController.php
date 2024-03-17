@@ -56,7 +56,6 @@ class ResultController extends Controller
     { 
     
         $request->validate([
-
             'marks'   => 'required'
         ]);
         foreach($request->marks as $studentid => $mark){
@@ -100,6 +99,6 @@ class ResultController extends Controller
      */
     public function destroy(result $result)
     {
-        //
+        
     }
 }

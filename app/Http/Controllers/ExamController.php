@@ -82,6 +82,7 @@ class ExamController extends Controller
      */
     public function destroy(exam $exam)
     {
-        //
+        $exam -> delete();
+        return redirect('exam.index');
     }
 }

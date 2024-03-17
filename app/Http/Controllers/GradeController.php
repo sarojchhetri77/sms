@@ -72,7 +72,15 @@ class GradeController extends Controller
      */
     public function update(Request $request, grade $grade)
     {
-        //
+        $request->validate([
+          'name' => 'required|string',
+          'section' => 'required|string',
+        ]);
+        $grade->name = $request->name;
+        $grade->section = $request->section;
+        $grade->teacher_id = $request->teacher_id;
+        $grade->update();
+        return redirect()->route('grade.index');
     }
 
     /**
